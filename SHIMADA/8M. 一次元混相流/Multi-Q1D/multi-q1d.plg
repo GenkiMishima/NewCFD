@@ -1,0 +1,26 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: multi-q1d - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\toru\LOCALS~1\Temp\RSPC4.tmp" with contents
+[
+/compile_only /nologo /warn:nofileopt /module:"Release/" /object:"Release/" 
+"C:\Documents and Settings\toru\My Documents\Multi-Phase Fluid Dynamics of SRM\Numerical Analysis\Multi-Q1D\multi-q1d.f90"
+]
+Creating command line "link.exe kernel32.lib /nologo /subsystem:console /incremental:no /pdb:"Release/multi-q1d.pdb" /machine:I386 /out:"Release/multi-q1d.exe"  ".\Release\multi-q1d.obj" "
+<h3>Output Window</h3>
+Compiling Fortran...
+C:\Documents and Settings\toru\My Documents\Multi-Phase Fluid Dynamics of SRM\Numerical Analysis\Multi-Q1D\multi-q1d.f90
+Linking...
+
+
+
+<h3>Results</h3>
+multi-q1d.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

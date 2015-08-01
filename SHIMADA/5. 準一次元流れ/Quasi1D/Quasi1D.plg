@@ -1,0 +1,29 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: Quasi1D - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\toru\LOCALS~1\Temp\RSP9B.tmp" with contents
+[
+/compile_only /nologo /warn:nofileopt /module:"Release/" /object:"Release/" 
+"C:\Documents and Settings\toru\My Documents\Multi-Phase Fluid Dynamics of SRM\Numerical Analysis\Quasi1D\q1dflow.f90"
+]
+Creating command line "link.exe kernel32.lib /nologo /subsystem:console /incremental:no /pdb:"Release/Quasi1D.pdb" /machine:I386 /out:"Release/Quasi1D.exe"  ".\Release\q1dflow.obj" "
+<h3>Output Window</h3>
+Compiling Fortran...
+C:\Documents and Settings\toru\My Documents\Multi-Phase Fluid Dynamics of SRM\Numerical Analysis\Quasi1D\q1dflow.f90
+C:\Documents and Settings\toru\My Documents\Multi-Phase Fluid Dynamics of SRM\Numerical Analysis\Quasi1D\q1dflow.f90(43) : Warning: This statement function has not been used.   [FNM]
+   fnM(i)=fnu(i)/fna(i)
+----------^
+Linking...
+
+
+
+<h3>Results</h3>
+Quasi1D.exe - 0 error(s), 1 warning(s)
+</pre>
+</body>
+</html>

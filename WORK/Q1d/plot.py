@@ -1,13 +1,13 @@
 #!/usr/bin/python
 import scipy as sp
 import matplotlib.pyplot as plt
-data = sp.genfromtxt('nozzle.d')
-print 'ok'
-x = data[:-1,0]
-y = data[:-1,1]
-plt.plot(x,y)
-plt.savefig('nozzle.png')
-plt.close()
+#data = sp.genfromtxt('nozzle.d')
+#print 'ok'
+#x = data[:-1,0]
+#y = data[:-1,1]
+#plt.plot(x,y)
+#plt.savefig('nozzle.png')
+#plt.close()
 
 data1 = sp.genfromtxt('data/density_002.d')
 x1 = data1[:,0]

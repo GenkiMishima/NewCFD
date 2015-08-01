@@ -1,0 +1,14 @@
+subroutine setIC(w,dx,dt)
+use prmtr
+implicit none
+double precision,dimension(1:3,0:CellNum)::w
+double precision dx,dt
+double precision temp(0:3)
+do i=1,CellNum-1
+   temp(3)=sqrt(gamma*w(3,i)/w(1,i))
+   temp(1)=w(2,i)
+   temp(1)=dx/(temp(1)+temp(3)
+   temp(0)=min(temp(0),temp(1)
+enddo
+dt=CFL*temp(0)
+end subroutine IC

@@ -1,0 +1,27 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: multi_q1d_lusgs - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\Users\shimada\AppData\Local\Temp\RSP7F4D.tmp" with contents
+[
+/compile_only /nologo /warn:nofileopt /module:"Release/" /object:"Release/" 
+"C:\Users\shimada\Documents\ÇOÇOÅDå§ãÜÉvÉçÉWÉFÉNÉg\ÇOÇSÅDComputational Fluid Dynamics of Two-Phase Flows in Solid Rocket Motors\#### Multi-Phase Fluid Dynamics of SRM ####\Numerical Analysis\Multi-Q1D\multi_q1d_lusgs.f90"
+]
+<h3>Output Window</h3>
+Compiling Fortran...
+C:\Users\shimada\Documents\ÇOÇOÅDå§ãÜÉvÉçÉWÉFÉNÉg\ÇOÇSÅDComputational Fluid Dynamics of Two-Phase Flows in Solid Rocket Motors\#### Multi-Phase Fluid Dynamics of SRM ####\Numerical Analysis\Multi-Q1D\multi_q1d_lusgs.f90
+f90: Severe: Invalid argument
+... file is 'C:\Users\shimada\Documents\?O?O?D?????v???W?F?N?g\?O?S?DComputational Fluid Dynamics of Two-Phase Flows in Solid Rocket Motors\#### Multi-Phase Fluid Dynamics of SRM ####\Numerical Analysis\Multi-Q1D\multi_q1d_lusgs.f90'
+Error executing df.exe.
+
+
+
+<h3>Results</h3>
+multi_q1d_lusgs.obj - 1 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

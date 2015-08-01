@@ -1,0 +1,31 @@
+		  &input
+		  CFL=0.15
+		  tend=8.e-1
+		  toutput=8.e-2
+		  phi=1.
+		  kappa=0.3333333333333333
+		  delta=0.25
+		  imp=1
+		  &end
+
+		  &flow
+		  rL=10.
+		  uL=0
+		  pL=1.e6
+		  rR=1.
+		  uR=0.
+		  pR=1.e5
+		  &end
+
+		  &particle
+		  rpL=4.
+		  upL=0.
+		  rpR=0.4
+		  upR=0.
+		  &end
+
+		  &space
+		  xmin=-1.
+		  xmax=1.
+		  xdia=0.
+		  &end

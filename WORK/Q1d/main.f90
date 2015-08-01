@@ -52,17 +52,18 @@ use prmtr
    !call set_conservative_variable_vector
    !call set_BC
    !call set_dt
-   !Quisa Term===================================
+   !Quasi Term===================================
    open(40,file='Area.txt')
    read(40,'(3e16.8)') (x(i),y(i),a(i),i=1,CellNum)
    close(40)
    dx = (xmax-xmin)/float(CellNum-1)
-   open(45,file='nozzle.d')
-   do i=0,CellNum
-      write(45,*) x(i),A(i)
-   end do
-   close(45)
+   !open(45,file='nozzle.d')
+   !do i=0,CellNum
+   !   write(45,*) x(i),A(i)
+   !end do
+   !close(45)
 
+   !call setIC(q,w,pL,uL,TL,pR,uR,tR,sonic,x,Vol,PreResi)
    do i=0,ni
       temp0 = (rR-rL)/float(CellNum-1)
       temp1 = (uR-uL)/float(CellNum-1)
@@ -78,6 +79,7 @@ use prmtr
       Vol(i) = temp0-temp1
       sonic(i) = sqrt(gamma*w(3,i)/w(1,i))
    end do
+   PreResi(:) = q(3,:)
 
    open(44,file='data/Condition.txt')
    write(44,*) 'Condition'
@@ -99,71 +101,36 @@ use prmtr
    do time=time_now, time_max
    !do time=1,2000
       t=t+dt
-      temp0=1.d300
 
-      !dt==============================================================
-      do i=1,CellNum-1
-         temp3=sqrt(gamma*w(3,i)/w(1,i))
-         temp1=w(2,i)
-         temp1=dx/(temp1+temp3)
-         temp0=min(temp0,temp1)
-      enddo
-      dt=CFL*temp0
+      call setdt(w,dx,dt)
 
       !Flux================================================================
-      PreResi(:) = q(3,:)
-      temp2 =0d0
       call SLAU_FLUX(w,Flux)
       do i = 0,CellNum-1
          Flux(:,i) = Flux(:,i)*A(i)
          Source(2,i) = w(3,i)*(A(i+1)-A(i))/Vol(i)
          !print *,i, Flux(:,i)
       end do
+
       !TimeIntegral========================================================
       !call calc_next_step_exp(q,Flux,Source,dt,dx,Vol)
       call calc_next_step_inp(q,w,Flux,Source,dt,dx,Vol,sonic,A)
-      !RESIDUAL===================================================
-      do i=1,CellNum-1
-         temp1 =(q(3,i)-PreResi(i))**2
-         temp2 = temp1+temp2
-         !write(35,'(i4,f15.4,f15.4,f15.4)') i,q(:,i)
-      enddo
-      Resi = temp2
-      !print *,Resi
-      !call exit
-      !call set_w
-      !PrimitiveValue=======================================================
-      do i=1,ni-1
-         w(1,i)=q(1,i)
-         temp0=1d0/w(1,i)
-         w(2,i)=q(2,i)*temp0
-         w(3,i)=(gamma-1.d0)*(q(3,i)-0.5d0*w(1,i)*(w(2,i)**2))
-         sonic(i) = sqrt(gamma*w(3,i)/w(1,i))
-         if(w(3,i)<0.d0)then
-            write(*,*) i, t
-            write(*,'(4es15.7)') w(:,i)
-            call exit(1)
-         endif
-      enddo
-      !call set_BC=================================================================
-      w(1,0)=pL/(TL*gas_spec)
-      w(2,0)=1.5d0*w(2,1)-0.5d0*w(2,2)
-      w(3,0)=pL
 
-      !w(1,CellNum)=1d0
-      !w(2,CellNum)=w(2,1)
-      !w(3,CellNum)=pR
-      w(:,CellNum)=1.5d0*w(:,CellNum-1)-0.5d0*w(:,CellNum-2)
+      !RESIDUAL===================================================
+      call setRESIDUAL(q,PreResi,Resi)
+
+      !PrimitiveValue=======================================================
+      call setPrimitiveValue(w,q,sonic,t)
+
+      !call set_BC=================================================================
+      call setBC(w,pL,TL,pR,tR)
 
       !Vector===============================================================
-      do i=0,ni
-         q(1,i)=w(1,i)
-         q(2,i)=w(2,i)*q(1,i)
-         q(3,i)=w(3,i)/(gamma-1.d0)+0.5d0*w(1,i)*(w(2,i)**2)
-      enddo
+      call setConservativeVector(w,q,PreResi)
 
       !OUTPUT==================================================================
       call output(x,w,time,t,dt,Resi)
+
       if(Resi<epsilon)then
          !temp_int=1
          !call output

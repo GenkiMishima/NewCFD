@@ -1,0 +1,22 @@
+		  &input
+		  CFL=0.1
+		  tend=0.5
+		  toutput=0.1
+		  phi=1.
+		  kappa=-1.
+		  &end
+
+		  &flow
+		  rL=1.
+		  uL=2.
+		  pL=1.
+		  rR=1.
+		  uR=-2.
+		  pR=1.
+		  &end
+
+		  &space
+		  xmin=-1.
+		  xmax=1.
+		  xdia=0.
+		  &end

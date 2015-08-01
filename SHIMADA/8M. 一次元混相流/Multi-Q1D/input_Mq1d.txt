@@ -1,0 +1,39 @@
+		  &input
+		  CFL=0.1
+		  maxiter=10000
+		  ipiter=1000
+		  phi=1
+		  kappa=0.3333333333333333
+		  delta=0.25
+		  imp=1
+		  &end
+
+		  &gas
+		  tL=3500.
+		  uL=0
+		  pL=5.e6
+		  tR=300.
+		  uR=0.
+		  pR=2e6
+		  amol=20.33
+		  gam=1.211
+		  &end
+
+		  &particle
+		  aloadratio=0.4
+		  tpL=3500.
+		  upL=0.
+		  tpR=3500.
+		  upR=0.
+		  dp=1.e-1
+		  &end
+
+		  &space
+		  xmin=0.
+		  xmax=4.
+		  &end
+
+		  &boundary
+		  ibtype_in=12
+		  ibtype_out=12
+		  &end

@@ -1,0 +1,12 @@
+# AVS field file
+ndim = 2
+dim1 = 101
+dim2 = 54
+nspace = 2
+veclen = 1
+data = float
+field = irregular
+label = pdens
+variable 1 file = "C:\Documents and Settings\toru\My Documents\Multi-Phase Fluid Dynamics of SRM\Numerical Analysis\multi_axi2d_L\p_density.data" filetype = ascii skip = 0 offset = 0 stride = 1
+coord 1 file = "C:\Documents and Settings\toru\My Documents\Multi-Phase Fluid Dynamics of SRM\Numerical Analysis\multi_axi2d_L\grid.data" filetype = ascii skip = 0 offset = 0 stride = 2
+coord 2 file = "C:\Documents and Settings\toru\My Documents\Multi-Phase Fluid Dynamics of SRM\Numerical Analysis\multi_axi2d_L\grid.data" filetype = ascii skip = 0 offset = 1 stride = 2
