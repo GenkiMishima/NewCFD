@@ -18,12 +18,4 @@ subroutine calc_next_step_exp
    enddo
    !$omp end parallel do
 
-   do j=1,nj-1
-      do i=1,ni-1
-         temp_residual1=temp_residual1+q(4,i,j) 
-      enddo
-   enddo
-   !residual
-   residual=abs(temp_residual1-temp_residual2)
-
 end subroutine calc_next_step_exp

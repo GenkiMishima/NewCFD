@@ -3,7 +3,7 @@ subroutine make_grid
    use variable
    implicit none
    integer i,j
-   open(55, file='../../grid/ideal_bl.x')
+   open(55, file='../../../grid/ideal_bl.x')
    read(55,*) temp0
    read(55,*) temp1,temp2,temp3
    if(temp0 .ne. 1)then

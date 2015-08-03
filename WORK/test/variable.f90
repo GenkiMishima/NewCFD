@@ -12,7 +12,7 @@ module variable
    double precision, dimension(   0:ni+1, 0:nj+1) :: x, r
    double precision, dimension(   0:ni  , 0:nj  ) :: grid_cen, dx, dr, dt
    double precision vnl, vnr, vtl, vtr
-   double precision, dimension(   1:ni  , 1:nj  ) :: Mach_number
+   double precision, dimension(   1:ni  , 1:nj  ) :: Mach_number,PreResi
    double precision, dimension(   1:ni  , 1:nj  ) :: temp_matrix5,temp_matrix
    double precision, dimension(   1:ni  , 1:nj  ) :: xgrid, rgrid
    double precision, dimension(4,4)               :: X_matrix, X_inverse, lambda, Y_matrix

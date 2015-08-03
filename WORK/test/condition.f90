@@ -58,6 +58,22 @@ subroutine set_BC
    enddo
    !$omp end parallel do
 end subroutine set_BC
+subroutine setRESIDUAL
+use prmtr
+use variable
+implicit none
+integer i,j
+double precision tt(10:13)
+tt(12) =0d0
+do i=1,ni-1
+   do j=1,nj-1
+      tt(11) =(q(4,i,j)-PreResi(i,j))**2
+      tt(12) = tt(11)+tt(12)
+      !write(35,'(i4,f15.4,f15.4,f15.4)') i,q(:,i)
+   enddo
+enddo
+residual = tt(12)
+end subroutine setRESIDUAL
 subroutine set_w
    use prmtr
    use variable
@@ -79,6 +95,7 @@ subroutine set_w
       enddo
    enddo
    !$omp end parallel do
+   PreResi(:,:) = q(4,:,:)
 end subroutine set_w
 subroutine set_conservative_variable_vector
    use prmtr
@@ -95,6 +112,7 @@ subroutine set_conservative_variable_vector
       enddo
    enddo
    !$omp end parallel do
+   !PreResi(:,:) = q(4,:,:)
 end subroutine set_conservative_variable_vector
 subroutine set_dt
    use prmtr

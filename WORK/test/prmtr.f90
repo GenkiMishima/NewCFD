@@ -13,7 +13,7 @@ module prmtr
    double precision, parameter :: phi=1.d0
    double precision, parameter :: kappa=1.d0/3.d0
    !Division
-   double precision, parameter :: CFL= 0.1d0
+   double precision, parameter :: CFL= 5d-1
    !STEP PARAMETER
    integer, parameter :: step_forward =101
    integer, parameter :: step_backward=103
