@@ -2,7 +2,7 @@ module variable
    use prmtr
    integer time
    double precision, dimension(4,-1:ni  ,-1:nj  ) :: w, w_left, w_right, w_down, w_up
-   double precision, dimension(4, 1:ni  , 1:nj  ) :: wp,q,qq
+   double precision, dimension(4, 1:ni  , 1:nj  ) :: wp,q,qq,qp
    double precision, dimension(4, 1:ni  , 1:nj  ) :: X_Flux, X_Numerical,vis_i
    double precision, dimension(4, 1:ni  , 1:nj  ) :: Y_Flux, Y_Numerical,vis_j
    double precision, dimension(4, 0:ni  , 0:nj  ) :: RHS, q_imp

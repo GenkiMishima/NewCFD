@@ -95,7 +95,6 @@ subroutine set_w
       enddo
    enddo
    !$omp end parallel do
-   PreResi(:,:) = q(4,:,:)
 end subroutine set_w
 subroutine set_conservative_variable_vector
    use prmtr

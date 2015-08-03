@@ -57,19 +57,26 @@ use variable
    !do time=1,2000
    !print *, residual,time
       t=t+dt(1,1)
+      qp=q
       call set_dt
       !call ROE_BODYFITTED
       call SLAU_FLUX
       call set_viscous
-      call calc_next_step_exp
+      !call calc_next_step_exp
+      call calc_next_step_rk_1
+      call set_w
+      call set_BC
+      call SLAU_FLUX
+      call set_viscous
+      call calc_next_step_rk_2
+      call set_w
+      call set_BC
       !==============================
       !!TimeIntegral========================================================
       !!call calc_next_step_exp(q,Flux,Source,dt,dx,Vol)
       !call calc_next_step_inp(q,w,Flux,Source,dt,dx,Vol,sonic,A)
       !==============================
       call setRESIDUAL
-      call set_w
-      call set_BC
       call output
       if(residual<epsilon)then
          !temp_int=1
