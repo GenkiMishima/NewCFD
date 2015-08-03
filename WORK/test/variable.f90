@@ -8,7 +8,7 @@ module variable
    double precision, dimension(4, 0:ni  , 0:nj  ) :: RHS, q_imp
    double precision, dimension(4, 1:ni  , 1:nj  ) :: X_inst
    double precision, dimension(4, 1:ni  , 1:nj  ) :: Y_inst
-   double precision, dimension(   0:ni  , 0:nj  ) :: Vol, Area
+   double precision, dimension(   0:ni  , 0:nj  ) :: Vol, Area, sonic
    double precision, dimension(   0:ni+1, 0:nj+1) :: x, r
    double precision, dimension(   0:ni  , 0:nj  ) :: grid_cen, dx, dr, dt
    double precision vnl, vnr, vtl, vtr

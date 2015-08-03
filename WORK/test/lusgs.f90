@@ -1,20 +1,22 @@
-subroutine calc_next_step_inp(q,w,Flux,Source,dt,dx,Vol,sonic,A)
+!subroutine calc_next_step_inp(q,w,Flux,Source,dt,dx,Vol,sonic,A)
+subroutine calc_next_step_inp
    use prmtr
    implicit none
    integer i,j
-   double precision,dimension(3,0:CellNum) :: q,w,Flux,Source,rhs,dq
-   double precision,dimension(  0:CellNum) :: Vol,sonic,A
-   double precision,dimension(  0:CellNum) :: NUMax,abar,factor
+   !double precision,dimension(4,0:ni,0:nj) :: q,w,Flux,Source,rhs,dq
+   !double precision,dimension(  0:ni 0:nj) :: Vol,sonic,A
+   double precision,dimension(4,0:ni,0:nj) :: rhs,dq
+   double precision,dimension(  0:ni 0:nj) :: NUMax,abar,factor
    double precision fact,v,H
-   double precision,dimension(3) :: ds
-   double precision,dimension(3,3) :: LUSGSVectorA,LUSGSVectorB,LUSGSVectorC
-   double precision,dimension(3,3,0:CellNum) :: dfdq
+   double precision,dimension(4) :: ds
+   double precision,dimension(4,4) :: LUSGSVectorA,LUSGSVectorB,LUSGSVectorC
+   double precision,dimension(4,4,0:ni) :: dfdq
 
    double precision dt,dx
 
    !!EULER SCHEME=========================={{{
    !!$omp parallel do
-   !do i=1,CellNum-1
+   !do i=1,ni-1
    !      !q(:,i)=q(:,i)+dt/Vol(i)*(Flux(:,i  )-Flux(:,i+1))+dt*Source(:,i)
    !enddo
    !!$omp end parallel do
@@ -22,24 +24,35 @@ subroutine calc_next_step_inp(q,w,Flux,Source,dt,dx,Vol,sonic,A)
 
    !LUSGS SCHEME=========================={{{
    !RIGHT HAND SIDE====================
-   !$omp parallel do
-   do i=1,CellNum-1
-         rhs(1:3,i)=Flux(1:3,i  )-Flux(1:3,i+1)
-         rhs(2,i)=rhs(2,i)+Vol(i)*Source(2,i)
-   enddo
+   !$omp parallel do private(i)
+   do j=1,nj-1
+      do i=1,ni-1
+         rhs(:,i,j)=X_Numerical(:,i,j)-X_Numerical(:,i+1,j)&
+                    Y_Numerical(:,i,j)-Y_Numerical(:,i,j+1)
+      end do
+   end do
    !$omp end parallel do
+   !!$omp parallel do
+   !do i=1,ni-1
+   !      rhs(1:3,i)=Flux(1:3,i  )-Flux(1:3,i+1)
+   !      rhs(2,i)=rhs(2,i)+Vol(i)*Source(2,i)
+   !enddo
+   !!$omp end parallel do
 
-   !$omp parallel do
-   do i=1,CellNum-1
-         NUMax(i)=abs(w(2,i))+sonic(i)
-         abar(i)=0.5d0*(A(i)+A(i+1))
-         factor(i)=Vol(i)/dt+abar(i)*NUMax(i)
-         rhs(1:3,i)=rhs(1:3,i)/factor(i)
+   !$omp parallel do private(i)
+   do j=1,nj-1
+      do i=1,ni-1
+            NUMax(i,j)=abs(w(2,i,j))+sonic(i,j)
+            factor(i,j)=1d0+dt/dx(i,j)
+            !abar(i)=0.5d0*(A(i)+A(i+1))
+            !factor(i,j)=Vol(i,j)/dt!+abar(i)*NUMax(i)
+            !rhs(1:4,i)=rhs(1:4,i,j)/factor(i,j)
+      enddo
    enddo
    !$omp end parallel do
    !point-implicit scheme==================
    !$omp parallel do
-   do i=1,CellNum-1
+   do i=1,ni-1
       fact=(A(i+1)-A(i))/Vol(i)*(gamma-1d0)
       v=w(2,i)
       ds(1)= fact*0.5d0*v*v
@@ -61,7 +74,7 @@ subroutine calc_next_step_inp(q,w,Flux,Source,dt,dx,Vol,sonic,A)
    !$omp end parallel do
    !forward substitution==================
    !$omp parallel do
-   do i=1,CellNum-1
+   do i=1,ni-1
       v=w(2,i)
       H=0.5d0*v**2+sonic(i)**2/(gamma-1d0)
 
@@ -77,7 +90,7 @@ subroutine calc_next_step_inp(q,w,Flux,Source,dt,dx,Vol,sonic,A)
    enddo
    !$omp end parallel do
    !$omp parallel do
-   do i=2,CellNum-1
+   do i=2,ni-1
       LUSGSVectorB=0.5d0*dfdq(1:3,1:3,i-1)
       LUSGSVectorB(1,1)=LUSGSVectorB(1,1)+0.5*NUMax(i-1)
       LUSGSVectorB(2,2)=LUSGSVectorB(2,2)+0.5*NUMax(i-1)
@@ -89,7 +102,7 @@ subroutine calc_next_step_inp(q,w,Flux,Source,dt,dx,Vol,sonic,A)
    !$omp end parallel do
    !backward substitution==================
    !$omp parallel do
-   do i=CellNum-2,1,-1
+   do i=ni-2,1,-1
       LUSGSVectorC=0.5d0*dfdq(1:3,1:3,i+1)
       LUSGSVectorC(1,1)=LUSGSVectorC(1,1)-0.5*NUMax(i+1)
       LUSGSVectorC(2,2)=LUSGSVectorC(2,2)-0.5*NUMax(i+1)
@@ -102,7 +115,7 @@ subroutine calc_next_step_inp(q,w,Flux,Source,dt,dx,Vol,sonic,A)
 
    !UPdata==================
    !$omp parallel do
-   do i=1,CellNum-1
+   do i=1,ni-1
       q(1:3,i)=q(1:3,i)+dq(1:3,i)
    enddo
    !$omp end parallel do

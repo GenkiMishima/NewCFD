@@ -95,7 +95,7 @@ subroutine set_w
       enddo
    enddo
    !$omp end parallel do
-   PreResi(:,:) = q(4,:,:)
+   sonic(:,:) = sqrt(gamma*w(4,:,:)/w(1,:,:))
 end subroutine set_w
 subroutine set_conservative_variable_vector
    use prmtr

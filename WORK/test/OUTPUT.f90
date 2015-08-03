@@ -3,6 +3,7 @@ subroutine output
    use variable
    implicit none
    integer i,j
+   PreResi(:,:) = q(4,:,:)
    if(time==1.or.(mod(time,out_time)== 0).or.temp_int==1) then
       !$omp parallel do private(i)
       do j = 1, nj
