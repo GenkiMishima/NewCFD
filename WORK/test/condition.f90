@@ -95,6 +95,10 @@ subroutine set_w
       enddo
    enddo
    !$omp end parallel do
+<<<<<<< HEAD
+=======
+   sonic(:,:) = sqrt(gamma*w(4,:,:)/w(1,:,:))
+>>>>>>> 9659c4bb512cdf28eb9a7841fcdc8f0e93d4882d
 end subroutine set_w
 subroutine set_conservative_variable_vector
    use prmtr

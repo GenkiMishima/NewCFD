@@ -63,6 +63,7 @@ use variable
       call SLAU_FLUX
       call set_viscous
       !call calc_next_step_exp
+<<<<<<< HEAD
       call calc_next_step_rk_1
       call set_w
       call set_BC
@@ -71,10 +72,13 @@ use variable
       call calc_next_step_rk_2
       call set_w
       call set_BC
+=======
+>>>>>>> 9659c4bb512cdf28eb9a7841fcdc8f0e93d4882d
       !==============================
       !!TimeIntegral========================================================
       !!call calc_next_step_exp(q,Flux,Source,dt,dx,Vol)
       !call calc_next_step_inp(q,w,Flux,Source,dt,dx,Vol,sonic,A)
+      call calc_next_step_inp
       !==============================
       call setRESIDUAL
       call output

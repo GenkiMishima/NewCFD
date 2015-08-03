@@ -2,7 +2,11 @@
 compiler=ifort -xHOST -O3 -static -parallel -openmp
 compiler1=ifort -xHOST -O3 -static
 
+<<<<<<< HEAD
 core = prmtr.o grid.o variable.o condition.o OUTPUT.o muscl.o euler_exp.o scheme.o viscous.o runge_kutta_exp.o
+=======
+core = prmtr.o grid.o variable.o condition.o OUTPUT.o muscl.o euler_exp.o scheme.o viscous.o #lusgs.o
+>>>>>>> 9659c4bb512cdf28eb9a7841fcdc8f0e93d4882d
 
 all: a.out
 
@@ -18,8 +22,11 @@ condition.o: condition.f90 variable.o
 	$(compiler) -c $<
 #lusgs.o: lusgs.f90 variable.o
 #	$(compiler) -c $<
+<<<<<<< HEAD
 runge_kutta_exp.o: runge_kutta_exp.f90 variable.o
 	$(compiler) -c $<
+=======
+>>>>>>> 9659c4bb512cdf28eb9a7841fcdc8f0e93d4882d
 euler_exp.o: euler_exp.f90 variable.o
 	$(compiler) -c $<
 OUTPUT.o: OUTPUT.f90 variable.o
